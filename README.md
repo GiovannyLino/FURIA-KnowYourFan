@@ -22,7 +22,7 @@
 ## 🚀 Deploy
 
 Você pode acessar o projeto online aqui:  
-👉 **[Know Your Fan - Versão Online](https://furia-knowyourfan.vercel.app/)**
+👉 **[Know Your Fan - Versão Online](https://furia-know-your-fan-lyart.vercel.app/login)**
 
 ## 📦 Instalação Local
 
