@@ -2,7 +2,7 @@
 
 **Know Your Fan** é uma aplicação web desenvolvida para a organização de eSports **FURIA**, com o objetivo de **coletar, validar e analisar dados de seus fãs** de forma interativa, segura e estilizada. A solução oferece experiências personalizadas para os usuários, com integração de redes sociais, validação por IA e muito mais.
 
-![FURIA Banner](https://static.furia.gg/images/og-furia.png)
+![FURIA Banner]([https://static.furia.gg/images/og-furia.png](https://assets.gamearena.gg/wp-content/uploads/2022/02/30014557/Valorant-Line-ups-das-equipes-da-Primeira-Etapa-do-VCT-BR-2022-5-1024x536.png))
 
 ## 🔥 Funcionalidades
 
