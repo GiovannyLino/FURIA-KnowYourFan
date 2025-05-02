@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+/* index.css */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Impede rolagem horizontal indesejada */
+  background-color: #111827; /* Cor de fundo escura */
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  min-height: 100%;
+  width: 100%;
+}
+
+.main-container {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden; /* Remove barras de rolagem */
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 80px;
+  background-color: #1f2937;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 20px;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.sidebar .logo {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+}
+
+.sidebar .social-icons {
+  margin-bottom: 20px;
+}
+
+.sidebar .social-icons a {
+  display: block;
+  margin: 10px 0;
+  text-align: center;
+  color: white;
+  font-size: 24px;
+}
+
+.sidebar .social-icons a:hover {
+  color: #fbbf24; /* Cor de destaque ao passar o mouse */
+}
+
+.content {
+  margin-left: 80px; /* Para dar espaço à sidebar */
+  flex-grow: 1;
+  overflow-y: auto; /* Permite rolagem vertical */
+  scroll-snap-type: y mandatory;
+  background-color: #111827;
+}
+
+/* Cada página de jogo (valorant, CS2, etc.) */
+.game-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  padding: 0;
+  margin: 0;
+}
+
+.game-page-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Escurece o fundo do GIF */
+}
+
+.game-page-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+}
+
+.game-page h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.game-page p {
+  font-size: 1.25rem;
+}
+
+.game-page button {
+  background-color: #fbbf24;
+  border: none;
+  padding: 10px 20px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+
+.game-page button:hover {
+  background-color: #f59e0b;
+}
+
+/* Remover as bordas do scroll */
+::-webkit-scrollbar {
+  display: none; /* Oculta a barra de rolagem */
+}
+
+.content::-webkit-scrollbar {
+  display: none; /* Oculta a barra de rolagem */
+}
