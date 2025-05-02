@@ -1,12 +1,85 @@
-# React + Vite
+# FURIA - Know Your Fan
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Know Your Fan** é uma aplicação web desenvolvida para a organização de eSports **FURIA**, com o objetivo de **coletar, validar e analisar dados de seus fãs** de forma interativa, segura e estilizada. A solução oferece experiências personalizadas para os usuários, com integração de redes sociais, validação por IA e muito mais.
 
-Currently, two official plugins are available:
+![FURIA Banner](https://static.furia.gg/images/og-furia.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔥 Funcionalidades
 
-## Expanding the ESLint configuration
+- Coleta de informações pessoais (nome, endereço, CPF, etc.)
+- Upload de documentos com validação automatizada via IA
+- Vinculação e desvinculação de contas de redes sociais
+- Detecção de interações, páginas seguidas e interesses relacionados à FURIA
+- Validação de perfis em sites de eSports
+- Interface visual inspirada no layout da FURIA, responsiva e estilosa
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🧪 Tecnologias Utilizadas
+
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS v4](https://tailwindcss.com/)
+- [Vercel](https://vercel.com/) (Deploy)
+- LocalStorage (para simulação de backend)
+
+## 🚀 Deploy
+
+Você pode acessar o projeto online aqui:  
+👉 **[Know Your Fan - Versão Online](https://furia-knowyourfan.vercel.app/)**
+
+## 📦 Instalação Local
+
+1. Clone o repositório:
+
+```bash
+git clone https://github.com/GiovannyLino/FURIA-KnowYourFan.git
+cd FURIA-KnowYourFan
+```
+
+2. Instale as dependências:
+
+```bash
+npm install
+```
+
+3. Rode o projeto:
+
+```bash
+npm run dev
+```
+
+4. Acesse: http://localhost:5173
+
+## 🗂 Estrutura de Pastas
+
+```bash
+src/
+├── assets/         # Imagens e arquivos estáticos
+├── components/     # Componentes reutilizáveis (Navbar, Sidebar, etc.)
+├── pages/          # Páginas principais (Home, Perfil, Criar Conta, etc.)
+├── App.jsx         # Componente principal
+└── main.jsx        # Entrada do React
+```
+
+## 🛡️ Segurança e Validações
+
+**Documentos enviados são simuladamente verificados por IA (ponto de integração futura).
+**Informações sensíveis armazenadas apenas localmente (sem backend).
+**A proposta inclui evolução futura com autenticação segura e banco de dados real.
+
+## 🧠 Ideia e Propósito
+
+Este projeto foi criado para proporcionar à FURIA uma plataforma personalizada de CRM de fãs, com foco em:
+
+**Fortalecimento da relação com a comunidade
+**Experiências exclusivas para fãs
+**Melhoria na coleta de dados para decisões estratégicas
+
+## ✍️ Autor
+
+Desenvolvido por Giovanny Lino
+Projeto inspirado nas soluções reais da organização FURIA.
+
+## 📌 Observações
+
+**O projeto ainda está em desenvolvimento contínuo.
+**Sugestões, feedbacks e colaborações são bem-vindas!
