@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import { FaTwitter, FaInstagram, FaTwitch } from "react-icons/fa";
 
 const Perfil = () => {
   const [userData, setUserData] = useState({
-    nome: "João Silva",
-    email: "joao.silva@exemplo.com",
-    cpf: "123.456.789-00",
+    nome: "",
+    email: "",
+    cpf: "",
     rua: "",
     numero: "",
     bairro: "",
@@ -22,7 +22,64 @@ const Perfil = () => {
       instagram: false,
       twitch: false,
     },
+    documento: null,
+    documentoStatus: null,
   });
+
+  const getUserAccountData = () => {
+    const userAccount = JSON.parse(localStorage.getItem("userAccount"));
+    const redesVinculadas = JSON.parse(localStorage.getItem("redesVinculadas"));
+    return { ...userAccount, redesVinculadas };
+  };
+
+  useEffect(() => {
+    const accountData = getUserAccountData();
+    if (accountData) {
+      setUserData({
+        nome: accountData.nome || "",
+        email: accountData.email || "",
+        cpf: accountData.cpf || "",
+        rua: accountData.rua || "",
+        numero: accountData.numero || "",
+        bairro: accountData.bairro || "",
+        cidade: accountData.cidade || "",
+        estado: accountData.estado || "",
+        cep: accountData.cep || "",
+        interesses: accountData.interesses || "",
+        atividades: accountData.atividades || "",
+        eventos: accountData.eventos || "",
+        compras: accountData.compras || "",
+        redesVinculadas: accountData.redesVinculadas || {
+          twitter: false,
+          instagram: false,
+          twitch: false,
+        },
+      });
+    } else {
+      setUserData({
+        nome: "",
+        email: "",
+        cpf: "",
+        rua: "",
+        numero: "",
+        bairro: "",
+        cidade: "",
+        estado: "",
+        cep: "",
+        interesses: "Jogos, Tecnologia, Música",
+        atividades: "",
+        eventos: "",
+        compras: "",
+        redesVinculadas: {
+          twitter: false,
+          instagram: false,
+          twitch: false,
+        },
+        documento: null,
+        documentoStatus: null,
+      });
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,14 +90,43 @@ const Perfil = () => {
   };
 
   const handleRedirecionar = (redeNome, urlLogin) => {
-    // Simula o redirecionamento para a página de login oficial da rede social
     window.open(urlLogin, "_blank");
-
-    // Simula o vínculo da conta e salva no localStorage
     setUserData((prev) => {
       const updatedRedesVinculadas = { ...prev.redesVinculadas, [redeNome]: true };
-      localStorage.setItem("redesVinculadas", JSON.stringify(updatedRedesVinculadas)); // Salvando no localStorage
+      localStorage.setItem("redesVinculadas", JSON.stringify(updatedRedesVinculadas));
       return { ...prev, redesVinculadas: updatedRedesVinculadas };
+    });
+  };
+
+  const handleSaveProfile = () => {
+    localStorage.setItem("userAccount", JSON.stringify(userData));
+    alert("Perfil atualizado com sucesso!");
+  };
+
+  const handleResetProfile = () => {
+    localStorage.removeItem("userAccount");
+    localStorage.removeItem("redesVinculadas");
+    setUserData({
+      nome: "",
+      email: "",
+      cpf: "",
+      rua: "",
+      numero: "",
+      bairro: "",
+      cidade: "",
+      estado: "",
+      cep: "",
+      interesses: "Jogos, Tecnologia, Música",
+      atividades: "",
+      eventos: "",
+      compras: "",
+      redesVinculadas: {
+        twitter: false,
+        instagram: false,
+        twitch: false,
+      },
+      documento: null,
+      documentoStatus: null,
     });
   };
 
@@ -203,101 +289,55 @@ const Perfil = () => {
               />
             </div>
 
-            {/* Botão de envio */}
-            <div className="mt-4 flex justify-center">
+            {/* Botões de atualização e reset */}
+            <div className="mt-4 flex justify-center space-x-4">
               <button
-                type="submit"
+                type="button"
+                onClick={handleSaveProfile}
                 className="px-6 py-2 bg-purple-500 text-white rounded-full hover:bg-purple-600"
               >
                 Atualizar Perfil
               </button>
+              <button
+                type="button"
+                onClick={handleResetProfile}
+                className="px-6 py-2 bg-red-500 text-white rounded-full hover:bg-red-600"
+              >
+                Resetar Perfil
+              </button>
             </div>
 
-            {/* Upload de documento e validação com IA */}
-            <div className="mt-6">
-              <h2 className="text-xl font-semibold mb-2">Upload de Documento para Validação de Identidade</h2>
-
-              <div className="flex flex-col gap-4">
-                <input
-                  type="file"
-                  accept=".png, .jpg, .jpeg, .pdf"
-                  onChange={(e) => {
-                    const file = e.target.files[0];
-                    if (file) {
-                      setUserData((prev) => ({
-                        ...prev,
-                        documento: file,
-                        documentoStatus: null,
-                      }));
-                    }
-                  }}
-                  className="w-full bg-gray-700 text-white p-2 rounded"
-                />
-
-                {userData.documento && (
-                  <div className="text-sm text-gray-300">
-                    Documento selecionado: <strong>{userData.documento.name}</strong>
-                  </div>
-                )}
-
+            {/* Redes sociais */}
+            <div className="mt-6 text-center">
+              <h2 className="text-xl font-semibold mb-4">Vincular Redes Sociais</h2>
+              <div className="flex justify-center space-x-6">
                 <button
                   type="button"
-                  onClick={() => {
-                    if (!userData.documento) {
-                      alert("Selecione um documento primeiro!");
-                      return;
-                    }
-
-                    // Simulação de análise com IA (2 segundos)
-                    setUserData((prev) => ({ ...prev, documentoStatus: "validando" }));
-
-                    setTimeout(() => {
-                      const isValid = Math.random() > 0.3; // Simulação de 70% de chance de sucesso
-                      setUserData((prev) => ({
-                        ...prev,
-                        documentoStatus: isValid ? "validado" : "invalido",
-                      }));
-                    }, 2000);
-                  }}
-                  className="px-4 py-2 rounded bg-blue-500 hover:bg-blue-600 text-white w-fit"
+                  onClick={() => handleRedirecionar('twitter', 'https://twitter.com/login')}
+                  className={`p-4 rounded-full border-2 ${userData.redesVinculadas.twitter ? 'opacity-50' : 'border-blue-500 hover:bg-blue-600'} `}
+                  disabled={userData.redesVinculadas.twitter}
                 >
-                  Validar com IA
+                  <FaTwitter size={28} className="text-blue-500" />
                 </button>
-
-                {userData.documentoStatus === "validando" && (
-                  <p className="text-yellow-400 animate-pulse">Analisando documento com IA...</p>
-                )}
-                {userData.documentoStatus === "validado" && (
-                  <p className="text-green-400 font-semibold">✅ Documento válido!</p>
-                )}
-                {userData.documentoStatus === "invalido" && (
-                  <p className="text-red-400 font-semibold">❌ Documento inválido. Tente novamente.</p>
-                )}
+                <button
+                  type="button"
+                  onClick={() => handleRedirecionar('instagram', 'https://www.instagram.com/accounts/login/')}
+                  className={`p-4 rounded-full border-2 ${userData.redesVinculadas.instagram ? 'opacity-50' : 'border-pink-500 hover:bg-pink-600'}`}
+                  disabled={userData.redesVinculadas.instagram}
+                >
+                  <FaInstagram size={28} className="text-pink-500" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleRedirecionar('twitch', 'https://www.twitch.tv/login')}
+                  className={`p-4 rounded-full border-2 ${userData.redesVinculadas.twitch ? 'opacity-50' : 'border-purple-600 hover:bg-purple-700'}`}
+                  disabled={userData.redesVinculadas.twitch}
+                >
+                  <FaTwitch size={28} className="text-purple-600" />
+                </button>
               </div>
             </div>
           </form>
-
-          {/* Redes Sociais */}
-          <div className="mt-6">
-            <h2 className="text-xl font-semibold mb-4 text-center">Vincule suas redes</h2>
-            <div className="flex justify-center gap-8 text-3xl">
-              {[
-                { nome: "twitter", icon: <FaTwitter />, cor: "text-blue-400", url: "https://twitter.com/login" },
-                { nome: "instagram", icon: <FaInstagram />, cor: "text-pink-500", url: "https://www.instagram.com/accounts/login/" },
-                { nome: "twitch", icon: <FaTwitch />, cor: "text-purple-500", url: "https://www.twitch.tv/login" },
-              ].map((rede) => (
-                <button
-                  key={rede.nome}
-                  onClick={() => handleRedirecionar(rede.nome, rede.url)}
-                  className={`transition-transform hover:scale-110 ${
-                    userData.redesVinculadas[rede.nome] ? rede.cor : "text-gray-400"
-                  }`}
-                >
-                  {rede.icon}
-                </button>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
     </div>

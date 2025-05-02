@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FaHome,
   FaUserAlt,
@@ -8,10 +8,30 @@ import {
   FaInstagram,
   FaTwitter,
   FaFacebook,
+  FaSignOutAlt,
 } from "react-icons/fa";
 
 const Sidebar = () => {
   const [showSocials, setShowSocials] = useState(false);
+  const socialRef = useRef(null);  // Referência para o balão de redes sociais
+  const navigate = useNavigate();
+
+  // Fechar o dropdown ao clicar fora
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (socialRef.current && !socialRef.current.contains(event.target)) {
+        setShowSocials(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("usuarioLogado");
+    navigate("/login");
+  };
 
   return (
     <div className="fixed top-0 left-0 h-20 w-full bg-gray-900 flex items-center justify-between px-6 z-50 shadow-md">
@@ -35,17 +55,30 @@ const Sidebar = () => {
       </div>
 
       {/* Right Section */}
-      <div className="relative">
+      <div className="relative flex items-center gap-4 text-white">
+        {/* Botão Globe para redes sociais */}
         <button
           onClick={() => setShowSocials(!showSocials)}
-          className="text-white hover:text-purple-400"
+          className="hover:text-purple-400"
         >
           <FaGlobe size={22} />
         </button>
 
-        {/* Social Media Icons Dropdown */}
+        {/* Botão de Logout */}
+        <button
+          onClick={handleLogout}
+          className="hover:text-red-500 transition"
+          title="Logout"
+        >
+          <FaSignOutAlt size={22} />
+        </button>
+
+        {/* Dropdown de redes sociais */}
         {showSocials && (
-          <div className="absolute right-0 mt-2 w-48 bg-gray-800 p-4 rounded-lg shadow-lg flex flex-col space-y-3">
+          <div
+            ref={socialRef} // Atribuindo a referência ao dropdown
+            className="absolute right-0 mt-4 w-48 bg-gray-800 p-4 rounded-lg shadow-lg flex flex-col space-y-3 z-50"
+          >
             <a
               href="https://www.youtube.com/channel/UCE4elIT7DqDv545IA71feHg"
               target="_blank"
