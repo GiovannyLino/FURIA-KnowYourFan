@@ -47,11 +47,13 @@ const Sidebar = () => {
 
       {/* Central Logo */}
       <div className="absolute left-1/2 transform -translate-x-1/2">
-        <img
-          src="/furia-logo-small.png"
-          alt="FURIA"
-          className="w-10 h-10 object-contain"
-        />
+        <Link to="/">
+          <img
+            src="/furia-logo-small.png"
+            alt="FURIA"
+            className="w-10 h-10 object-contain"
+          />
+        </Link>
       </div>
 
       {/* Right Section */}
