@@ -135,7 +135,7 @@ const Perfil = () => {
       <Sidebar />
 
       <div
-        className="flex items-center justify-center pt-20 min-h-screen bg-cover bg-center"
+        className="flex items-center justify-center pt-30 pb-10 min-h-screen bg-cover bg-center"
         style={{
           backgroundImage: "url('/furia-logo.gif')",
           backgroundRepeat: "no-repeat",
