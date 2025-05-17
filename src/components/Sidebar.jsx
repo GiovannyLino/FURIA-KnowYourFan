@@ -77,7 +77,7 @@ const Sidebar = () => {
         {showSocials && (
           <div
             ref={socialRef} // Atribuindo a referência ao dropdown
-            className="absolute right-0 mt-4 w-48 bg-gray-800 p-4 rounded-lg shadow-lg flex flex-col space-y-3 z-50"
+            className="absolute right-0 mt-38 w-48 bg-gray-800 p-4 rounded-lg shadow-lg flex flex-col space-y-3 z-50"
           >
             <a
               href="https://www.youtube.com/channel/UCE4elIT7DqDv545IA71feHg"
